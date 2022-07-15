@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>Rest-Api Sample (v1.0)</h1>
+    <h1>Rest-Api Sample</h1>
 </div>
 
 ## 1. 설명
