@@ -39,7 +39,7 @@
 
 
 ## 2. 테이블 설계
-### 2-1. [공통] 멤버십 정보 (MEMBERSHIP)
+### 2-1. 멤버십 정보 (MEMBERSHIP)
 msp_id*
 msp_nm
 status (1:사용 9:사용금지)
@@ -57,7 +57,7 @@ insert_user
 update_date
 update_user
 
-### 2-1. [공통] 제휴 멤버십 가입등급 (MEMBERSHIP_GRADE)
+### 2-1. 멤버십 등급별 가입여부 (MEMBERSHIP_GRADE)
 msp_id*
 account_grade*
 status (1:사용 9:사용금지)
@@ -66,7 +66,7 @@ insert_user
 update_date
 update_user
 
-### 2-2. [공통] 가맹점 (FRANCHISEE)
+### 2-2. 가맹점 (FRANCHISEE)
 franchisee_id*
 franchisee_nm
 status (1:사용 9:사용금지)
@@ -83,7 +83,7 @@ insert_user
 update_date
 update_user
 
-### 2-2. [공통] 멤버십 가맹점 (MEMBERSHIP_FRANCHISEE)
+### 2-2. 멤버십 대상 가맹점 (MEMBERSHIP_FRANCHISEE)
 msp_id*
 franchisee_id*
 status (1:사용 9:사용금지)
@@ -92,6 +92,46 @@ insert_user
 update_date
 update_user
 
-### 2-3. [회원] 회원정보 (ACCOUNT)
-### 2-4. [회원] 회원 멤버십 (ACCOUNT_MEMBERSHIP)
-### 2-5. [회원] 바코드 & QR 발급 관리 (ACCOUNT_BARCODE_QR)
+### 2-3. 회원정보 (ACCOUNT)
+account_id*
+account_nm
+status (1:사용 9:사용금지 0:탈퇴)
+email
+birth
+hphone
+grade (vip/gold/silver/bronze/common)
+insert_date
+insert_user
+update_date
+update_user
+
+### 2-4. 회원 멤버십 (ACCOUNT_MEMBERSHIP)
+account_id*
+msp_id*
+status (1:사용 9:사용금지 0:탈퇴)
+total_amt
+total_point
+join_date
+withdrawal_date
+insert_date
+insert_user
+update_date
+update_user
+
+### 2-4. 멤버십 적립내역 (MEMBERSHIP_ACCUM_HIS)
+point_accum_seq*
+msp_id
+account_id
+accum_fg (A:적립 U:사용)
+trade_point
+expire_ymd
+
+### 2-5. 멤버십 적립 바코드 관리 (MEMBERSHIP_BARCODE)
+bar_cd*
+create_date*
+account_id
+msp_id
+franchisee_id
+trade_amt
+expire_date
+use_date
