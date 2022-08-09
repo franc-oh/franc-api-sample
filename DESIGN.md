@@ -39,8 +39,59 @@
 
 
 ## 2. 테이블 설계
-### 2-1. [공통] 제휴 멤버십 정보 (MEMBERSHIP)
+### 2-1. [공통] 멤버십 정보 (MEMBERSHIP)
+msp_id*
+msp_nm
+status (1:사용 9:사용금지)
+msp_info
+msp_img_url
+homepage_url
+msp_accum_fg (1:정액 2:정률)
+msp_accum_amt
+msp_accum_rat
+msp_point_expire_fg (1:년 2:월 3:일 0:무제한)
+msp_point_expire_val
+bigo
+insert_date
+insert_user
+update_date
+update_user
+
+### 2-1. [공통] 제휴 멤버십 가입등급 (MEMBERSHIP_GRADE)
+msp_id*
+account_grade*
+status (1:사용 9:사용금지)
+insert_date
+insert_user
+update_date
+update_user
+
+### 2-2. [공통] 가맹점 (FRANCHISEE)
+franchisee_id*
+franchisee_nm
+status (1:사용 9:사용금지)
+tel_no
+zip_cd
+addr1
+addr2
+franchisee_mng_nm
+franchisee_mng_tel_no
+franchisee_mng_email
+bigo
+insert_date
+insert_user
+update_date
+update_user
+
 ### 2-2. [공통] 멤버십 가맹점 (MEMBERSHIP_FRANCHISEE)
+msp_id*
+franchisee_id*
+status (1:사용 9:사용금지)
+insert_date
+insert_user
+update_date
+update_user
+
 ### 2-3. [회원] 회원정보 (ACCOUNT)
 ### 2-4. [회원] 회원 멤버십 (ACCOUNT_MEMBERSHIP)
 ### 2-5. [회원] 바코드 & QR 발급 관리 (ACCOUNT_BARCODE_QR)
