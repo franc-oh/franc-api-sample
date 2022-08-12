@@ -39,99 +39,129 @@
 
 
 ## 2. 테이블 설계
-### 2-1. 멤버십 정보 (MEMBERSHIP)
-msp_id*
-msp_nm
-status (1:사용 9:사용금지)
-msp_info
-msp_img_url
-homepage_url
-msp_accum_fg (1:정액 2:정률)
-msp_accum_amt
-msp_accum_rat
-msp_point_expire_fg (1:년 2:월 3:일 0:무제한)
-msp_point_expire_val
-bigo
-insert_date
-insert_user
-update_date
-update_user
+### 2-1. 회원 정보 (ACCOUNT)
+````
+ACCOUNT_ID [*]                    - 회원ID
+ACCOUNT_NM                        - 회원이름
+STATUS                            - 상태 (1:사용 9:사용금지 0:탈퇴)
+EMAIL                             - 이메일
+BIRTH                             - 생년월일 (yyyymmdd)
+HPHONE                            - 휴대폰번호
+GRADE                             - 회원등급 (VIP/GOLD/SILVER/BRONZE/COMMON)
+INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
+INSERT_USER                       - 등록자
+UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
+UPDATE_USER                       - 수정자
+````
 
-### 2-1. 멤버십 등급별 가입여부 (MEMBERSHIP_GRADE)
-msp_id*
-account_grade*
-status (1:사용 9:사용금지)
-insert_date
-insert_user
-update_date
-update_user
+### 2-2. 멤버십 정보 (MEMBERSHIP)
+````
+MSP_ID [*]                        - 멤버십ID
+MSP_NM                            - 멤버십이름
+STATUS                            - 상태 (1:사용 9:사용금지)
+MSP_INFO                          - 멤버십 안내문구
+MSP_IMG_URL                       - 멤버십 이미지 경로
+HOMEPAGE_URL                      - 제휴사 홈페이지
+MSP_ACCUM_FG                      - 멤버십 적립구분 (1:정액 2:정률)    
+MSP_ACCUM_AMT                     - 멤버십 적립액
+MSP_ACCUM_RAT                     - 멤버십 적립률
+MSP_POINT_EXPIRE_FG               - 적립포인트 유효기간 단위 (1:년 2:월 3:일 0:무제한)
+MSP_POINT_EXPIRE_VAL              - 적립포인트 유효기간 값
+BIGO                              - 비고
+INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
+INSERT_USER                       - 등록자
+UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
+UPDATE_USER                       - 수정자
+````
 
-### 2-2. 가맹점 (FRANCHISEE)
-franchisee_id*
-franchisee_nm
-status (1:사용 9:사용금지)
-tel_no
-zip_cd
-addr1
-addr2
-franchisee_mng_nm
-franchisee_mng_tel_no
-franchisee_mng_email
-bigo
-insert_date
-insert_user
-update_date
-update_user
+### 2-3. 가맹점 정보 (FRANCHISEE)
+````
+FRANCHISEE_ID [*]                 - 가맹점ID
+FRANCHISEE_NM                     - 가맹점명
+STATUS                            - 상태 (1:사용 9:사용금지)
+TEL_NO                            - 대표전화번호
+ZIP_CD                            - 우편번호
+ADDR1                             - 주소
+ADDR2                             - 상세주소
+FRANCHISEE_MNG_NM                 - 가맹점주_이름
+FRANCHISEE_MNG_HPHONE             - 가맹점주_휴대폰번호
+FRANCHISEE_MNG_EMAIL              - 가맹점주_이메일주소
+BIGO                              - 비고
+INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
+INSERT_USER                       - 등록자
+UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
+UPDATE_USER                       - 수정자
+````
 
-### 2-2. 멤버십 대상 가맹점 (MEMBERSHIP_FRANCHISEE)
-msp_id*
-franchisee_id*
-status (1:사용 9:사용금지)
-insert_date
-insert_user
-update_date
-update_user
+### 2-4. 멤버십별 가입가능한 회원등급 (MEMBERSHIP_GRADE)
+- 멤버십별로 가입가능한 회원등급에 대한 로우 데이터를 관리
+- 등급별로 멤버십 가입을 제한하기 위함 (ex. VIP등급 타겟 멤버십)
+````
+MSP_ID [*]                        - 멤버십ID
+ACCOUNT_GRADE [*]                 - 회원등급
+STATUS                            - 상태 (1:사용 9:사용금지)
+INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
+INSERT_USER                       - 등록자
+UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
+UPDATE_USER                       - 수정자
+````
 
-### 2-3. 회원정보 (ACCOUNT)
-account_id*
-account_nm
-status (1:사용 9:사용금지 0:탈퇴)
-email
-birth
-hphone
-grade (vip/gold/silver/bronze/common)
-insert_date
-insert_user
-update_date
-update_user
 
-### 2-4. 회원 멤버십 (ACCOUNT_MEMBERSHIP)
-account_id*
-msp_id*
-status (1:사용 9:사용금지 0:탈퇴)
-total_amt
-total_point
-join_date
-withdrawal_date
-insert_date
-insert_user
-update_date
-update_user
 
-### 2-4. 멤버십 적립내역 (MEMBERSHIP_ACCUM_HIS)
-point_accum_seq*
-msp_id
-account_id
-accum_fg (A:적립 U:사용)
-trade_point
-expire_ymd
+### 2-5. 멤버십별 가맹점 (MEMBERSHIP_FRANCHISEE)
+- 멤버십별로 계약된 가맹점 데이터를 관리
+- ex. 적립 요청 시 해당 멤버십에 가입된 가맹점인지 체크 
+````
+MSP_ID [*]                        - 멤버십ID
+FRANCHISEE_ID [*]                 - 가맹점ID
+STATUS                            - 상태 (1:사용 9:사용금지)
+INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
+INSERT_USER                       - 등록자
+UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
+UPDATE_USER                       - 수정자
+````
 
-### 2-5. 멤버십 적립 바코드 관리 (MEMBERSHIP_BARCODE)
-bar_cd*
-create_date*
-account_id
-msp_id
-franchisee_id
-trade_amt
-expire_date
-use_date
+
+
+### 2-6. 회원별 멤버십 가입정보 (ACCOUNT_MEMBERSHIP)
+- 회원별로 어떤 멤버십에 가입됐는지에 대한 데이터를 관리
+````
+ACCOUNT_ID [*]                    - 회원ID
+MSP_ID [*]                        - 멤버십ID
+STATUS                            - 상태 (1:사용 9:사용금지 0:탈퇴)
+TOTAL_AMT                         - 총 결제금액
+USABLE_POINT                      - 사용가능한 포인트
+JOIN_DATE                         - 가입일자 (yyyymmddhhmmss)
+WITHDRAWAL_DATE                   - 탈퇴일자 (yyyymmddhhmmss)
+INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
+INSERT_USER                       - 등록자
+UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
+UPDATE_USER                       - 수정자
+````
+
+### 2-7. 회원별 멤버십 적립내역 (ACCOUNT_MEMBERSHIP_ACCUM)
+- 회원별로 어떤 멤버십으로 얼마가 적립되고, 사용됐는지에 대한 이력을 관리
+````
+POINT_ACCUM_SEQ [*]               - SEQ
+MSP_ID                            - 멤버십ID
+ACCOUNT_ID                        - 회원ID
+ACCUM_FG                          - 적립구분 (A:적립 U:사용)
+TRADE_POINT                       - 거래포인트
+EXPIRE_YMD                        - 만료일 (yyyymmdd)
+````
+
+### 2-8. 멤버십 적립 바코드 관리 (MEMBERSHIP_BARCODE)
+- 멤버십 적립요청(사용요청) 시 바코드 데이터가 만들어진다.
+- 바코드를 가맹점에서 스캔 시 가맹점정보 및 거래금액 등에 대한 정보가 갱신된다.
+````
+BAR_CD [*]                        - 바코드
+CREATE_DATE [*]                   - 생성일자 (yyyymmddhhmmss)
+ACCOUNT_ID                        - 회원ID
+MSP_ID                            - 멤버십ID
+FRANCHISEE_ID                     - 가맹점ID
+ACCUM_FG                          - 적립구분 (A:적립 U:사용)
+TRADE_AMT                         - 거래금액
+USE_POINT                         - 사용포인트
+EXPIRE_DATE                       - 바코드 만료일자 (yyyymmddhhmmss)
+USE_DATE                          - 바코드 사용일자 (yyyymmddhhmmss)
+````
