@@ -1,0 +1,58 @@
+### 어플리케이션에 적용할 프로파일 설정
+spring:
+  profiles:
+    active: local
+
+---
+### LOCAL 환경
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  profiles: local # -- 해당 프로퍼티가 적용될 프로파일
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+
+  ## DB Connection
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=1
+    username: franc_membership
+    password: 22#m!embership
+
+  ## JPA 관련 설정
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true # -- ddl-auto를 사용할 것인가?
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    open-in-view: false # -- 영속성을 컨트롤러 영역까지 가져갈 것인가? (false:서비스 영역까지만 유지할 것인가?)
+    properties:
+      hibernate:
+        format_sql: true # -- Pretty Log
+
+  ## Jackson 관련 설정
+  jackson:
+    default-property-inclusion: non_null # -- JSON으로 직렬화 할 때 'null'인 필드는 생략
+
+  h2:
+    console:
+      enabled: true
+
+# -- hibernate 로그의 '?'에 어떤 값이 들어갔는지 보여준다.
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: debug

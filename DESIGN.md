@@ -47,7 +47,7 @@ STATUS                            - 상태 (1:사용 9:사용금지 0:탈퇴)
 EMAIL                             - 이메일
 BIRTH                             - 생년월일 (yyyymmdd)
 HPHONE                            - 휴대폰번호
-GRADE                             - 회원등급 (VIP/GOLD/SILVER/BRONZE/COMMON)
+GRADE                             - 회원등급 (VIP/USER)
 INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
 INSERT_USER                       - 등록자
 UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
