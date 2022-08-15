@@ -4,14 +4,14 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * [코드] 회원_등급 (VIP/USER)
+ * [코드] 회원_등급 (VIP/USER/ADMIN)
  */
 @Getter
 @RequiredArgsConstructor
 public enum AccountGrade {
     VIP("VIP"),
-    USER("USER");
+    USER("USER"),
+    ADMIN("ADMIN");
 
     private final String accountGrade;
-
 }

@@ -47,7 +47,7 @@ STATUS                            - 상태 (1:사용 9:사용금지 0:탈퇴)
 EMAIL                             - 이메일
 BIRTH                             - 생년월일 (yyyymmdd)
 HPHONE                            - 휴대폰번호
-GRADE                             - 회원등급 (VIP/USER)
+GRADE                             - 회원등급 (VIP/USER/ADMIN)
 INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
 INSERT_USER                       - 등록자
 UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
@@ -65,8 +65,8 @@ HOMEPAGE_URL                      - 제휴사 홈페이지
 MSP_ACCUM_FG                      - 멤버십 적립구분 (1:정액 2:정률)    
 MSP_ACCUM_AMT                     - 멤버십 적립액
 MSP_ACCUM_RAT                     - 멤버십 적립률
-MSP_POINT_EXPIRE_FG               - 적립포인트 유효기간 단위 (1:년 2:월 3:일 0:무제한)
-MSP_POINT_EXPIRE_VAL              - 적립포인트 유효기간 값
+MSP_ACCUM_MIN_AMT                 - 적립가능한 최소금액 (0:제한없음)
+MSP_POINT_EXPIRE_DAYS             - 적립포인트 유효기간 (일단위, 0:무제한)
 BIGO                              - 비고
 INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
 INSERT_USER                       - 등록자
@@ -150,7 +150,7 @@ TRADE_POINT                       - 거래포인트
 EXPIRE_YMD                        - 만료일 (yyyymmdd)
 ````
 
-### 2-8. 멤버십 적립 바코드 관리 (MEMBERSHIP_BARCODE)
+### 2-8. 멤버십 적립 바코드 관리 (ACCOUNT_MEMBERSHIP_BARCODE)
 - 멤버십 적립요청(사용요청) 시 바코드 데이터가 만들어진다.
 - 바코드를 가맹점에서 스캔 시 가맹점정보 및 거래금액 등에 대한 정보가 갱신된다.
 ````
