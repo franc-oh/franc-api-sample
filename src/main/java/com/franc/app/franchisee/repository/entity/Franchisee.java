@@ -63,7 +63,7 @@ public class Franchisee {
     private Long insertUser;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    private LocalDateTime updateDate;
 
     private Long updateUser;
 }

@@ -66,7 +66,7 @@ public class Membership {
     private Long insertUser;
 
     @LastModifiedDate
-    private LocalDateTime updatedAt;
+    private LocalDateTime updateDate;
 
     private Long updateUser;
 }

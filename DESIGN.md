@@ -123,7 +123,7 @@ UPDATE_USER                       - 수정자
 
 
 
-### 2-6. 회원별 멤버십 가입정보 (ACCOUNT_MEMBERSHIP)
+### 2-6. 회원별 멤버십 가입정보 (MY_MEMBERSHIP)
 - 회원별로 어떤 멤버십에 가입됐는지에 대한 데이터를 관리
 ````
 ACCOUNT_ID [*]                    - 회원ID
@@ -139,7 +139,7 @@ UPDATE_DATE                       - 수정일자 (yyyymmddhhmmss)
 UPDATE_USER                       - 수정자
 ````
 
-### 2-7. 회원별 멤버십 적립내역 (ACCOUNT_MEMBERSHIP_ACCUM)
+### 2-7. 회원별 멤버십 적립내역 (MY_MEMBERSHIP_ACCUM)
 - 회원별로 어떤 멤버십으로 얼마가 적립되고, 사용됐는지에 대한 이력을 관리
 ````
 POINT_ACCUM_SEQ [*]               - SEQ
@@ -150,7 +150,7 @@ TRADE_POINT                       - 거래포인트
 EXPIRE_YMD                        - 만료일 (yyyymmdd)
 ````
 
-### 2-8. 멤버십 적립 바코드 관리 (ACCOUNT_MEMBERSHIP_BARCODE)
+### 2-8. 멤버십 적립 바코드 관리 (MY_MEMBERSHIP_BARCODE)
 - 멤버십 적립요청(사용요청) 시 바코드 데이터가 만들어진다.
 - 바코드를 가맹점에서 스캔 시 가맹점정보 및 거래금액 등에 대한 정보가 갱신된다.
 ````
