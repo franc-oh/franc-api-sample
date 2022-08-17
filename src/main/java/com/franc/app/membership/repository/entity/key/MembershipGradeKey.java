@@ -1,4 +1,4 @@
-package com.franc.app.membership.repository.entity;
+package com.franc.app.membership.repository.entity.key;
 
 import java.io.Serializable;
 

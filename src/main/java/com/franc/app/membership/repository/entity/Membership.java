@@ -1,11 +1,10 @@
 package com.franc.app.membership.repository.entity;
 
-import com.franc.app.membership.repository.code.MembershipStatus;
+import com.franc.app.code.CommonStatus;
+import com.franc.app.code.MspAccumFg;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -29,7 +28,7 @@ public class Membership {
 
     @Column(length = 1, columnDefinition = "char(1) default '1'")
     @Enumerated(EnumType.STRING)
-    private MembershipStatus status = MembershipStatus.USING;
+    private CommonStatus status = CommonStatus.USING;
 
     @Column(length = 200)
     private String mspInfo;
@@ -40,8 +39,8 @@ public class Membership {
     @Column(length = 100)
     private String homepageUrl;
 
-    @Column(length = 1) @ColumnDefault("2")
-    private Character mspAccumFg = '2';
+    @Column(length = 1, columnDefinition = "char(1) default '2'")
+    private MspAccumFg mspAccumFg = MspAccumFg.RAT;
 
     @ColumnDefault("0")
     private Integer mspAccumAmt = 0;

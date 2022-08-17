@@ -1,4 +1,4 @@
-package com.franc.app.account.repository.code;
+package com.franc.app.code;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

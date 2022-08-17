@@ -1,7 +1,7 @@
 package com.franc.app.account.repository.entity;
 
-import com.franc.app.account.repository.code.AccountGrade;
-import com.franc.app.account.repository.code.AccountStatus;
+import com.franc.app.code.AccountGrade;
+import com.franc.app.code.AccountStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;

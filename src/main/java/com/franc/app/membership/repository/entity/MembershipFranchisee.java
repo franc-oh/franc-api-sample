@@ -1,7 +1,7 @@
 package com.franc.app.membership.repository.entity;
 
-import com.franc.app.membership.repository.code.MembershipFranchiseeStatus;
-import com.franc.app.membership.repository.code.MembershipGradeStatus;
+import com.franc.app.code.CommonStatus;
+import com.franc.app.membership.repository.entity.key.MembershipFranchiseeKey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,7 +28,7 @@ public class MembershipFranchisee {
 
     @Column(length = 1, columnDefinition = "char(1) default '1'")
     @Enumerated(EnumType.STRING)
-    private MembershipFranchiseeStatus status = MembershipFranchiseeStatus.USING;
+    private CommonStatus status = CommonStatus.USING;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)

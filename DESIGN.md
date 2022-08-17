@@ -127,7 +127,6 @@ MSP_ID [*]                        - 멤버십ID
 STATUS                            - 상태 (1:사용 9:사용금지 0:탈퇴)
 TOTAL_AMT                         - 총 결제금액
 USABLE_POINT                      - 사용가능한 포인트
-JOIN_DATE                         - 가입일자 (yyyymmddhhmmss)
 WITHDRAWAL_DATE                   - 탈퇴일자 (yyyymmddhhmmss)
 INSERT_DATE                       - 등록일자 (yyyymmddhhmmss)
 INSERT_USER                       - 등록자

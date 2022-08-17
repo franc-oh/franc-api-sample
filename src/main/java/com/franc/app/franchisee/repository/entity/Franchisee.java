@@ -1,11 +1,8 @@
 package com.franc.app.franchisee.repository.entity;
 
-import com.franc.app.franchisee.repository.code.FranchiseeStatus;
+import com.franc.app.code.CommonStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -29,7 +26,7 @@ public class Franchisee {
 
     @Column(length = 1, columnDefinition = "char(1) default '1'")
     @Enumerated(EnumType.STRING)
-    private FranchiseeStatus status = FranchiseeStatus.USING;
+    private CommonStatus status = CommonStatus.USING;
 
     @Column(length = 20)
     private String telNo;
