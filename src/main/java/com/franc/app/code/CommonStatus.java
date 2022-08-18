@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum CommonStatus {
-    USING('1', "사용"),
-    NON_USING('9', "사용금지");
+public enum CommonStatus implements CodeValue {
+    USING("1", "사용"),
+    NON_USING("9", "사용금지");
 
-    private final char code;
+    private final String code;
     private final String value;
 }

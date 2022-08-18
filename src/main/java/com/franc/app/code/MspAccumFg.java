@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum MspAccumFg {
-    AMT('1', "정액"),
-    RAT('2', "정률");
+public enum MspAccumFg implements CodeValue {
+    AMT("1", "정액"),
+    RAT("2", "정률");
 
-    private final char code;
+    private final String code;
     private final String value;
 }

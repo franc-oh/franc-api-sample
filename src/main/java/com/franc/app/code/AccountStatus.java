@@ -8,11 +8,11 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum AccountStatus {
-    USING('1', "사용"),
-    NON_USING('9', "사용금지"),
-    WITHDRAWAL('0', "탈퇴");
+public enum AccountStatus implements CodeValue {
+    USING("1", "사용"),
+    NON_USING("9", "사용금지"),
+    WITHDRAWAL("0", "탈퇴");
 
-    private final char code;
+    private final String code;
     private final String value;
 }

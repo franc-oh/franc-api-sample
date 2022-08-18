@@ -8,10 +8,10 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum AccumFg {
-    ACCUM('A', "적립"),
-    USE('U', "사용");
+public enum AccumFg implements CodeValue {
+    ACCUM("A", "적립"),
+    USE("U", "사용");
 
-    private final char code;
+    private final String code;
     private final String value;
 }
