@@ -4,7 +4,7 @@ import com.franc.app.code.CommonStatus;
 
 import javax.persistence.Converter;
 
-@Converter(autoApply = true)
+@Converter
 public class CommonStatusConverter extends CodeValueConverter<CommonStatus> {
     CommonStatusConverter() {
         super(CommonStatus.class);

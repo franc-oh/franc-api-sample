@@ -2,6 +2,7 @@ package com.franc.app.membership.repository.entity;
 
 import com.franc.app.code.AccountGrade;
 import com.franc.app.code.CommonStatus;
+import com.franc.app.code.converter.AccountGradeConverter;
 import com.franc.app.membership.repository.entity.key.MembershipGradeKey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,11 +27,13 @@ public class MembershipGrade {
 
     @Id
     @Column(length = 10)
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
+    @Convert(converter = AccountGradeConverter.class)
     private AccountGrade accountGrade;
 
     @Column(columnDefinition = "char(1) default '1'")
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = CommonStatus.class)
+    //@Enumerated(EnumType.STRING)
     private CommonStatus status = CommonStatus.USING;
 
     @CreatedDate

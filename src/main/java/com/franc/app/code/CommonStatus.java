@@ -1,7 +1,6 @@
 package com.franc.app.code;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 /**
  * [코드] 상태 (1:사용 9:사용금지)
