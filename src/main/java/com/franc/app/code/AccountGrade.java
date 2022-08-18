@@ -9,9 +9,10 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum AccountGrade {
-    VIP("VIP"),
-    USER("USER"),
-    ADMIN("ADMIN");
+    VIP("VIP", "VIP고객"),
+    USER("USER", "일반고객"),
+    ADMIN("ADMIN", "관리자");
 
-    private final String accountGrade;
+    private final String code;
+    private final String value;
 }

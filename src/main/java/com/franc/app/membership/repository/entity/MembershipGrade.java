@@ -1,5 +1,6 @@
 package com.franc.app.membership.repository.entity;
 
+import com.franc.app.code.AccountGrade;
 import com.franc.app.code.CommonStatus;
 import com.franc.app.membership.repository.entity.key.MembershipGradeKey;
 import lombok.Getter;
@@ -24,9 +25,11 @@ public class MembershipGrade {
     private Long mspId;
 
     @Id
-    private String accountGrade;
+    @Column(length = 10)
+    @Enumerated(EnumType.STRING)
+    private AccountGrade accountGrade;
 
-    @Column(length = 1, columnDefinition = "char(1) default '1'")
+    @Column(columnDefinition = "char(1) default '1'")
     @Enumerated(EnumType.STRING)
     private CommonStatus status = CommonStatus.USING;
 

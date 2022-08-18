@@ -9,8 +9,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum MspAccumFg {
-    AMT("1"),
-    RAT("2");
+    AMT('1', "정액"),
+    RAT('2', "정률");
 
-    private final String mspAccumFg;
+    private final char code;
+    private final String value;
 }

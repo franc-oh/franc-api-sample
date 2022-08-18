@@ -9,8 +9,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum CommonStatus {
-    USING("1"),
-    NON_USING("9");
+    USING('1', "사용"),
+    NON_USING('9', "사용금지");
 
-    private final String status;
+    private final char code;
+    private final String value;
 }

@@ -9,8 +9,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum AccumFg {
-    ACCUM("A"),
-    USE("U");
+    ACCUM('A', "적립"),
+    USE('U', "사용");
 
-    private final String accumFg;
+    private final char code;
+    private final String value;
 }
