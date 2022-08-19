@@ -30,7 +30,7 @@ public class MembershipGrade {
 
     @Id
     @Column(columnDefinition = "varchar(10)")
-    private String accountGrade;
+    private AccountGrade accountGrade;
 
     @Column(columnDefinition = "char(1) default '1'")
     @Convert(converter = CommonStatusConverter.class)

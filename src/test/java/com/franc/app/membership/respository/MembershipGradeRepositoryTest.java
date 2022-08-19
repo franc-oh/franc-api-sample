@@ -23,13 +23,14 @@ public class MembershipGradeRepositoryTest {
     public void 가입허용등급조회() throws Exception {
         // #given
         Long mspId = 1L;
-        String accountGrade = AccountGrade.USER.getCode();
+        AccountGrade accountGrade = AccountGrade.USER;
         CommonStatus status = CommonStatus.USING;
         MembershipGradeKey membershipGradeKey = new MembershipGradeKey().builder()
                 .mspId(mspId)
                 .accountGrade(accountGrade)
                 .build();
 
+        System.out.println("====================== " + membershipGradeRepository.findAll().toString());
         MembershipGrade membershipGrade = membershipGradeRepository.findById(membershipGradeKey).orElse(null);
 
         // #then
