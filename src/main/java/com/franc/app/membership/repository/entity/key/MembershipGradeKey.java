@@ -1,21 +1,19 @@
 package com.franc.app.membership.repository.entity.key;
 
 import com.franc.app.code.AccountGrade;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 
-@Getter
+@Getter @ToString
 @NoArgsConstructor
 public class MembershipGradeKey implements Serializable {
     private Long mspId;
-    private AccountGrade accountGrade;
+    private String accountGrade;
 
     @Builder
-    public MembershipGradeKey(Long mspId, AccountGrade accountGrade) {
+    public MembershipGradeKey(Long mspId, String accountGrade) {
         this.mspId = mspId;
         this.accountGrade = accountGrade;
     }

@@ -3,9 +3,11 @@ package com.franc.app.membership.repository.entity;
 import com.franc.app.code.AccountGrade;
 import com.franc.app.code.CommonStatus;
 import com.franc.app.code.converter.AccountGradeConverter;
+import com.franc.app.code.converter.CommonStatusConverter;
 import com.franc.app.membership.repository.entity.key.MembershipGradeKey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -19,6 +21,7 @@ import java.time.LocalDateTime;
 @Entity
 @IdClass(MembershipGradeKey.class)
 @Getter
+@ToString
 @NoArgsConstructor
 public class MembershipGrade {
 
@@ -26,13 +29,11 @@ public class MembershipGrade {
     private Long mspId;
 
     @Id
-    @Column(length = 10)
-    //@Enumerated(EnumType.STRING)
-    @Convert(converter = AccountGradeConverter.class)
-    private AccountGrade accountGrade;
+    @Column(columnDefinition = "varchar(10)")
+    private String accountGrade;
 
     @Column(columnDefinition = "char(1) default '1'")
-    @Convert(converter = CommonStatus.class)
+    @Convert(converter = CommonStatusConverter.class)
     //@Enumerated(EnumType.STRING)
     private CommonStatus status = CommonStatus.USING;
 
