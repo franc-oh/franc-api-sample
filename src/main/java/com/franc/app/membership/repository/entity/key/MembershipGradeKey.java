@@ -6,8 +6,10 @@ import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+@Embeddable
 @Getter @ToString
 @NoArgsConstructor
 public class MembershipGradeKey implements Serializable {

@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
@@ -23,20 +21,19 @@ public class MembershipGradeRepositoryTest {
     public void 가입허용등급조회() throws Exception {
         // #given
         Long mspId = 1L;
-        AccountGrade accountGrade = AccountGrade.USER;
+        AccountGrade accountGrade = AccountGrade._USER;
         CommonStatus status = CommonStatus.USING;
         MembershipGradeKey membershipGradeKey = new MembershipGradeKey().builder()
                 .mspId(mspId)
                 .accountGrade(accountGrade)
                 .build();
 
-        System.out.println("====================== " + membershipGradeRepository.findAll().toString());
         MembershipGrade membershipGrade = membershipGradeRepository.findById(membershipGradeKey).orElse(null);
 
         // #then
         assertThat(membershipGrade).isNotNull();
-        assertThat(membershipGrade.getMspId()).isEqualTo(mspId);
-        assertThat(membershipGrade.getAccountGrade()).isEqualTo(accountGrade);
+        assertThat(membershipGrade.getId().getMspId()).isEqualTo(mspId);
+        assertThat(membershipGrade.getId().getAccountGrade()).isEqualTo(accountGrade);
         assertThat(membershipGrade.getStatus()).isEqualTo(status);
     }
 }

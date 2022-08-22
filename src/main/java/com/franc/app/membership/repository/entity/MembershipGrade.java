@@ -19,22 +19,16 @@ import java.time.LocalDateTime;
  */
 
 @Entity
-@IdClass(MembershipGradeKey.class)
 @Getter
 @ToString
 @NoArgsConstructor
 public class MembershipGrade {
 
-    @Id
-    private Long mspId;
-
-    @Id
-    @Column(columnDefinition = "varchar(10)")
-    private AccountGrade accountGrade;
+    @EmbeddedId
+    private MembershipGradeKey id;
 
     @Column(columnDefinition = "char(1) default '1'")
     @Convert(converter = CommonStatusConverter.class)
-    //@Enumerated(EnumType.STRING)
     private CommonStatus status = CommonStatus.USING;
 
     @CreatedDate

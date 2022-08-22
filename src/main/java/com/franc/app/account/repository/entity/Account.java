@@ -43,7 +43,7 @@ public class Account {
 
     @Column(length = 10)  @ColumnDefault("'USER'")
     @Enumerated(EnumType.STRING)
-    private AccountGrade grade = AccountGrade.USER;
+    private AccountGrade grade = AccountGrade._USER;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
