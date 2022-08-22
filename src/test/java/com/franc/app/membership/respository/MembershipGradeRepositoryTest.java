@@ -28,7 +28,8 @@ public class MembershipGradeRepositoryTest {
                 .accountGrade(accountGrade)
                 .build();
 
-        MembershipGrade membershipGrade = membershipGradeRepository.findById(membershipGradeKey).orElse(null);
+        // #when
+        MembershipGrade membershipGrade = membershipGradeRepository.findByIdAndStatusEquals(membershipGradeKey, status);
 
         // #then
         assertThat(membershipGrade).isNotNull();
