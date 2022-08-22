@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.NoSuchElementException;
+
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
@@ -29,7 +31,7 @@ public class MembershipGradeRepositoryTest {
                 .build();
 
         // #when
-        MembershipGrade membershipGrade = membershipGradeRepository.findByIdAndStatusEquals(membershipGradeKey, status);
+        MembershipGrade membershipGrade = membershipGradeRepository.findByIdAndStatusEqualsUsing(membershipGradeKey);
 
         // #then
         assertThat(membershipGrade).isNotNull();
