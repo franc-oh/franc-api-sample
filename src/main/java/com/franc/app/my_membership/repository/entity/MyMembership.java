@@ -2,10 +2,13 @@ package com.franc.app.my_membership.repository.entity;
 
 import com.franc.app.code.CommonStatus;
 import com.franc.app.code.MyMembershipStatus;
+import com.franc.app.code.converter.CommonStatusConverter;
+import com.franc.app.code.converter.MyMembershipStatusConverter;
 import com.franc.app.my_membership.repository.entity.key.MyMembershipKey;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,12 +18,11 @@ import java.time.LocalDateTime;
  */
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @IdClass(MyMembershipKey.class)
 @Getter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class MyMembership {
     @Id
     private Long accountId;
@@ -29,8 +31,8 @@ public class MyMembership {
     private Long mspId;
 
     @Column(columnDefinition = "char(1) default '1'")
-    @Enumerated(EnumType.STRING)
-    private MyMembershipStatus status = MyMembershipStatus.USING;
+    @Convert(converter = MyMembershipStatusConverter.class)
+    private MyMembershipStatus status;
 
     @Column(nullable = false)
     private Integer totalAmt;
@@ -41,7 +43,7 @@ public class MyMembership {
     private LocalDateTime withdrawalDate;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     private LocalDateTime insertDate;
 
     @Column(updatable = false)
@@ -52,4 +54,15 @@ public class MyMembership {
 
     private Long updateUser;
 
+    @Builder
+    public MyMembership(Long accountId, Long mspId, MyMembershipStatus status, Integer totalAmt, Integer usablePoint, LocalDateTime withdrawalDate, Long insertUser, Long updateUser) {
+        this.accountId = accountId;
+        this.mspId = mspId;
+        this.status = status == null ? MyMembershipStatus.USING : status;
+        this.totalAmt = totalAmt;
+        this.usablePoint = usablePoint;
+        this.withdrawalDate = withdrawalDate;
+        this.insertUser = insertUser;
+        this.updateUser = updateUser;
+    }
 }

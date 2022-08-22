@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
  */
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @ToString
 @NoArgsConstructor
@@ -32,7 +34,7 @@ public class MembershipGrade {
     private CommonStatus status = CommonStatus.USING;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false)
     private LocalDateTime insertDate;
 
     @Column(updatable = false)
