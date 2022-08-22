@@ -3,8 +3,7 @@ package com.franc.app.my_membership.repository.entity;
 import com.franc.app.code.CommonStatus;
 import com.franc.app.code.MyMembershipStatus;
 import com.franc.app.my_membership.repository.entity.key.MyMembershipKey;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,7 +17,10 @@ import java.time.LocalDateTime;
 @Entity
 @IdClass(MyMembershipKey.class)
 @Getter
+@ToString
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MyMembership {
     @Id
     private Long accountId;
@@ -26,7 +28,7 @@ public class MyMembership {
     @Id
     private Long mspId;
 
-    @Column(length = 1, columnDefinition = "char(1) default '1'")
+    @Column(columnDefinition = "char(1) default '1'")
     @Enumerated(EnumType.STRING)
     private MyMembershipStatus status = MyMembershipStatus.USING;
 

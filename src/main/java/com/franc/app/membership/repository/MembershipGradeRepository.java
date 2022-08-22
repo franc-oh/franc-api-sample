@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface MembershipGradeRepository extends JpaRepository<MembershipGrade, MembershipGradeKey> {
     @Query(value = "select mg from MembershipGrade mg "
-            + "where mg.id.mspId = :#{#key.mspId} "
-            + "and mg.id.accountGrade = :#{#key.accountGrade} "
+            + "where mg.id.mspId = :#{#membershipGradeKey.mspId} "
+            + "and mg.id.accountGrade = :#{#membershipGradeKey.accountGrade} "
             + "and mg.status = '1'"
     )
-    MembershipGrade findByIdAndStatusEqualsUsing(@Param("key") MembershipGradeKey membershipGradeKey);
+    MembershipGrade findByIdAndStatusEqualsUsing(@Param("membershipGradeKey") MembershipGradeKey membershipGradeKey);
 }
