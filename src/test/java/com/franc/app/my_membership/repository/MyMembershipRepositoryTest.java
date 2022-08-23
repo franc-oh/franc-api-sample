@@ -1,8 +1,9 @@
 package com.franc.app.my_membership.repository;
 
-import com.franc.app.code.MyMembershipStatus;
-import com.franc.app.my_membership.repository.entity.MyMembership;
-import com.franc.app.my_membership.repository.entity.key.MyMembershipKey;
+import com.franc.app.domain.my_membership.repository.MyMembershipRepository;
+import com.franc.app.global.code.MyMembershipStatus;
+import com.franc.app.domain.my_membership.repository.entity.MyMembership;
+import com.franc.app.domain.my_membership.repository.entity.key.MyMembershipKey;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -29,11 +30,11 @@ public class MyMembershipRepositoryTest {
                 .build();
 
         // #when
-        MyMembership existsMyMembership = myMembershipRepository.findById(key)
+        MyMembership existMyMembership = myMembershipRepository.findById(key)
                 .orElse(null);
 
         // #then
-        assertThat(existsMyMembership).isNull();
+        assertThat(existMyMembership).isNull();
     }
 
     @Test
@@ -47,14 +48,14 @@ public class MyMembershipRepositoryTest {
                 .build();
 
         // #when
-        MyMembership existsMyMembership = myMembershipRepository.findById(key)
+        MyMembership existMyMembership = myMembershipRepository.findById(key)
                 .orElse(null);
 
         // #then
-        assertThat(existsMyMembership).isNotNull();
-        assertThat(existsMyMembership.getAccountId()).isEqualTo(accountId);
-        assertThat(existsMyMembership.getMspId()).isEqualTo(mspId);
-        assertThat(existsMyMembership.getStatus()).isEqualTo(MyMembershipStatus.USING);
+        assertThat(existMyMembership).isNotNull();
+        assertThat(existMyMembership.getAccountId()).isEqualTo(accountId);
+        assertThat(existMyMembership.getMspId()).isEqualTo(mspId);
+        assertThat(existMyMembership.getStatus()).isEqualTo(MyMembershipStatus.USING);
     }
 
     public MyMembership buildEntity() {

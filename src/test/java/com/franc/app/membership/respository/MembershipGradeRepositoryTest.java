@@ -1,10 +1,10 @@
 package com.franc.app.membership.respository;
 
-import com.franc.app.code.AccountGrade;
-import com.franc.app.code.CommonStatus;
-import com.franc.app.membership.repository.MembershipGradeRepository;
-import com.franc.app.membership.repository.entity.MembershipGrade;
-import com.franc.app.membership.repository.entity.key.MembershipGradeKey;
+import com.franc.app.global.code.AccountGrade;
+import com.franc.app.global.code.CommonStatus;
+import com.franc.app.domain.membership.repository.MembershipGradeRepository;
+import com.franc.app.domain.membership.repository.entity.MembershipGrade;
+import com.franc.app.domain.membership.repository.entity.key.MembershipGradeKey;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -29,7 +29,8 @@ public class MembershipGradeRepositoryTest {
                 .build();
 
         // #when
-        MembershipGrade membershipGrade = membershipGradeRepository.findByIdAndStatusEqualsUsing(membershipGradeKey);
+        MembershipGrade membershipGrade = membershipGradeRepository.findByIdAndStatusEqualsUsing(membershipGradeKey)
+                .orElse(null);
 
         // #then
         assertThat(membershipGrade).isNotNull();
