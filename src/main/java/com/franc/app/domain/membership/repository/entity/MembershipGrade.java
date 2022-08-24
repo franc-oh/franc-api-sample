@@ -48,7 +48,7 @@ public class MembershipGrade {
     @Builder
     public MembershipGrade(MembershipGradeKey id, CommonStatus status, Long insertUser, Long updateUser) {
         this.id = id;
-        this.status = status == null ? CommonStatus.USING : status;
+        this.status = status;
         this.insertUser = insertUser;
         this.updateUser = updateUser;
     }

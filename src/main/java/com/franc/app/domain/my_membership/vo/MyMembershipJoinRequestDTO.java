@@ -3,16 +3,15 @@ package com.franc.app.domain.my_membership.vo;
 import com.franc.app.global.code.AccountGrade;
 import lombok.*;
 
+@Data
 @NoArgsConstructor
-@Getter @Setter
-@ToString
-public class MyMembershipReqDTO {
+public class MyMembershipJoinRequestDTO {
     private Long accountId;
     private Long mspId;
     private AccountGrade accountGrade;
 
     @Builder
-    public MyMembershipReqDTO(Long accountId, Long mspId, AccountGrade accountGrade) {
+    public MyMembershipJoinRequestDTO(Long accountId, Long mspId, AccountGrade accountGrade) {
         this.accountId = accountId;
         this.mspId = mspId;
         this.accountGrade = accountGrade;
