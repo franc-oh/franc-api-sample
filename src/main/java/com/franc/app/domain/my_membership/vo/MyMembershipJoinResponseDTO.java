@@ -3,11 +3,14 @@ package com.franc.app.domain.my_membership.vo;
 import com.franc.app.domain.my_membership.repository.entity.MyMembership;
 import com.franc.app.global.code.MyMembershipStatus;
 import com.franc.app.global.dto.ResponseDTO;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @ToString(callSuper = true)
 public class MyMembershipJoinResponseDTO extends ResponseDTO {
     private Long accountId;

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ResponseDTO {
 
-    private String code;
-    private String message;
+    private String code = "000";
+    private String message = "정상";
 
 }
