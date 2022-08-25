@@ -48,7 +48,7 @@ public class MyMembershipService {
         if(availMembershipGrade == null)
             throw new BizException(BizExceptionResult.MY_MEMBERSHIP_JOIN_NON_PERMISSION_GRADE);
 
-        log.debug("멤버십가입_가입등급체크 => " + availMembershipGrade.toString());
+        log.debug("멤버십가입_가입등급체크 => {}", availMembershipGrade.toString());
 
         // #2. 기등록여부 체크
         MyMembership existMyMembership = myMembershipRepository.findById(new MyMembershipKey().builder()
@@ -63,7 +63,7 @@ public class MyMembershipService {
             existMembershipStatus = existMyMembership.getStatus();
             withdrawalDate = existMyMembership.getWithdrawalDate();
 
-            log.debug("멤버십가입_기등록여부체크 => " + existMyMembership.toString());
+            log.debug("멤버십가입_기등록여부체크 => {}", existMyMembership.toString());
         }
 
         // ##2-1. '사용' 또는 '중지' 상태의 멤버십인 경우 => 기등록 멤버십
@@ -92,7 +92,7 @@ public class MyMembershipService {
             response.entityToDto(existMyMembership);
         }
 
-        log.debug("멤버십가입_가입처리 => " + response.toString());
+        log.debug("멤버십가입_가입처리 => {}", response.toString());
 
         return response;
     }

@@ -34,7 +34,7 @@ public class MyMembershipController {
 
         try {
             // #1. Request 검증
-            log.info("멤버십가입_Request => " + request.toString());
+            log.info("멤버십가입_Request => {}", request.toString());
 
             if(bindingResult.hasErrors()) {
                 log.warn(bindingResult.getFieldErrors().toString());
@@ -61,7 +61,7 @@ public class MyMembershipController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 
         } finally {
-            log.info("멤버십가입_Response => " + response.toString());
+            log.info("멤버십가입_Response => {}", response.toString());
         }
     }
 
