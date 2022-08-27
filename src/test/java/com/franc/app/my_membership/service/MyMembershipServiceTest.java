@@ -1,7 +1,7 @@
 package com.franc.app.my_membership.service;
 
 import com.franc.app.domain.my_membership.service.MyMembershipService;
-import com.franc.app.domain.my_membership.vo.MyMembershipJoinResponseDTO;
+import com.franc.app.domain.my_membership.dto.MyMembershipJoinResponseDTO;
 import com.franc.app.global.code.AccountGrade;
 import com.franc.app.global.code.MyMembershipStatus;
 import com.franc.app.domain.membership.repository.MembershipGradeRepository;
@@ -10,9 +10,9 @@ import com.franc.app.domain.membership.repository.entity.key.MembershipGradeKey;
 import com.franc.app.domain.my_membership.repository.MyMembershipRepository;
 import com.franc.app.domain.my_membership.repository.entity.MyMembership;
 import com.franc.app.domain.my_membership.repository.entity.key.MyMembershipKey;
-import com.franc.app.domain.my_membership.vo.MyMembershipJoinRequestDTO;
+import com.franc.app.domain.my_membership.dto.MyMembershipJoinRequestDTO;
 import com.franc.app.global.exception.BizException;
-import com.franc.app.global.exception.BizExceptionResult;
+import com.franc.app.global.exception.GlobalExceptionResult;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -56,7 +56,7 @@ public class MyMembershipServiceTest {
                 assertThrows(BizException.class, () -> myMembershipService.join(myMembershipReqDTO));
 
         // #then
-        assertThat(exception.getResult()).isEqualTo(BizExceptionResult.MY_MEMBERSHIP_JOIN_NON_PERMISSION_GRADE);
+        assertThat(exception.getResult()).isEqualTo(GlobalExceptionResult.MY_MEMBERSHIP_JOIN_NON_PERMISSION_GRADE);
         verify(membershipGradeRepository, times(1)).findByIdAndStatusEqualsUsing(any(MembershipGradeKey.class));
     }
 
@@ -82,7 +82,7 @@ public class MyMembershipServiceTest {
                 assertThrows(BizException.class, () -> myMembershipService.join(myMembershipReqDTO));
 
         // #then
-        assertThat(exception.getResult()).isEqualTo(BizExceptionResult.MY_MEMBERSHIP_JOIN_DUPLICATED_MEMBERSHIP);
+        assertThat(exception.getResult()).isEqualTo(GlobalExceptionResult.MY_MEMBERSHIP_JOIN_DUPLICATED_MEMBERSHIP);
         verify(membershipGradeRepository, times(1)).findByIdAndStatusEqualsUsing(any(MembershipGradeKey.class));
         verify(myMembershipRepository, times(1)).findById(any(MyMembershipKey.class));
     }
@@ -110,7 +110,7 @@ public class MyMembershipServiceTest {
                 assertThrows(BizException.class, () -> myMembershipService.join(myMembershipReqDTO));
 
         // #then
-        assertThat(exception.getResult()).isEqualTo(BizExceptionResult.MY_MEMBERSHIP_JOIN_NOT_AVAILABLE_REJOIN);
+        assertThat(exception.getResult()).isEqualTo(GlobalExceptionResult.MY_MEMBERSHIP_JOIN_NOT_AVAILABLE_REJOIN);
         verify(membershipGradeRepository, times(1)).findByIdAndStatusEqualsUsing(any(MembershipGradeKey.class));
         verify(myMembershipRepository, times(1)).findById(any(MyMembershipKey.class));
     }

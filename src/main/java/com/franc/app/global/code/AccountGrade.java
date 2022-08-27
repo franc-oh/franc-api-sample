@@ -24,9 +24,10 @@ public enum AccountGrade implements CodeValue {
     private final String code;
     private final String value;
 
-
+    // TODO : 중복코드
     private static final Map<String, AccountGrade> stringToEnum =
             Stream.of(values()).collect(toMap(Objects::toString, e -> e));
+
     @JsonCreator
     public static AccountGrade fromString(String str) {
         for(AccountGrade accountGrade : AccountGrade.values()) {
@@ -36,6 +37,7 @@ public enum AccountGrade implements CodeValue {
 
         return null;
     }
+
     @JsonValue
     public String getCode() {
         return code;

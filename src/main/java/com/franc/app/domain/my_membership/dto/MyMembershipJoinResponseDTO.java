@@ -1,4 +1,4 @@
-package com.franc.app.domain.my_membership.vo;
+package com.franc.app.domain.my_membership.dto;
 
 import com.franc.app.domain.my_membership.repository.entity.MyMembership;
 import com.franc.app.global.code.MyMembershipStatus;
@@ -7,7 +7,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

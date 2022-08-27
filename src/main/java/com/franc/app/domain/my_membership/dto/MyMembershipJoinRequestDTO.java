@@ -1,4 +1,4 @@
-package com.franc.app.domain.my_membership.vo;
+package com.franc.app.domain.my_membership.dto;
 
 import com.franc.app.global.code.AccountGrade;
 import com.franc.app.global.code.converter.AccountGradeConverter;

@@ -6,5 +6,5 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class BizException extends RuntimeException {
-    private final BizExceptionResult result;
+    private final GlobalExceptionResult result;
 }

@@ -1,16 +1,16 @@
 package com.franc.app.domain.my_membership.service;
 
 import com.franc.app.domain.my_membership.repository.entity.key.MyMembershipKey;
-import com.franc.app.domain.my_membership.vo.MyMembershipJoinResponseDTO;
+import com.franc.app.domain.my_membership.dto.MyMembershipJoinResponseDTO;
 import com.franc.app.global.code.MyMembershipStatus;
 import com.franc.app.domain.membership.repository.MembershipGradeRepository;
 import com.franc.app.domain.membership.repository.entity.MembershipGrade;
 import com.franc.app.domain.membership.repository.entity.key.MembershipGradeKey;
 import com.franc.app.domain.my_membership.repository.MyMembershipRepository;
 import com.franc.app.domain.my_membership.repository.entity.MyMembership;
-import com.franc.app.domain.my_membership.vo.MyMembershipJoinRequestDTO;
+import com.franc.app.domain.my_membership.dto.MyMembershipJoinRequestDTO;
 import com.franc.app.global.exception.BizException;
-import com.franc.app.global.exception.BizExceptionResult;
+import com.franc.app.global.exception.GlobalExceptionResult;
 import com.franc.app.global.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ public class MyMembershipService {
                 .orElse(null);
 
         if(availMembershipGrade == null)
-            throw new BizException(BizExceptionResult.MY_MEMBERSHIP_JOIN_NON_PERMISSION_GRADE);
+            throw new BizException(GlobalExceptionResult.MY_MEMBERSHIP_JOIN_NON_PERMISSION_GRADE);
 
         log.debug("멤버십가입_가입등급체크 => {}", availMembershipGrade.toString());
 
@@ -69,12 +69,12 @@ public class MyMembershipService {
         // ##2-1. '사용' 또는 '중지' 상태의 멤버십인 경우 => 기등록 멤버십
         if(MyMembershipStatus.USING.equals(existMembershipStatus)
                 || MyMembershipStatus.NON_USING.equals(existMembershipStatus))
-            throw new BizException(BizExceptionResult.MY_MEMBERSHIP_JOIN_DUPLICATED_MEMBERSHIP);
+            throw new BizException(GlobalExceptionResult.MY_MEMBERSHIP_JOIN_DUPLICATED_MEMBERSHIP);
 
         // ##2-2. '탈퇴'상태의 멤버십인 경우 => 탈퇴당일 재가입 불가
         if(MyMembershipStatus.WITHDRAWAL.equals(existMembershipStatus)
                 && DateUtil.isEqualNowDate(withdrawalDate))
-            throw new BizException(BizExceptionResult.MY_MEMBERSHIP_JOIN_NOT_AVAILABLE_REJOIN);
+            throw new BizException(GlobalExceptionResult.MY_MEMBERSHIP_JOIN_NOT_AVAILABLE_REJOIN);
 
         // #3. 가입 처리
         response = new MyMembershipJoinResponseDTO();
