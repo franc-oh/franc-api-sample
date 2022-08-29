@@ -23,12 +23,8 @@ public class GlobalExceptionHandler {
         String errorCode = String.valueOf(GlobalExceptionResult.PARAMETER_NOT_VALID.getCode().value());
         String errorMessage = GlobalExceptionResult.PARAMETER_NOT_VALID.getMessage();
 
-        // TODO : 중복코드
         return ResponseEntity.status(GlobalExceptionResult.PARAMETER_NOT_VALID.getCode())
-                .body(new ExceptionResponseDTO().builder()
-                        .code(errorCode)
-                        .message(errorMessage)
-                        .build());
+                .body(buildExceptionResponse(errorCode, errorMessage));
     }
 
     /**
@@ -43,12 +39,8 @@ public class GlobalExceptionHandler {
         String errorCode = String.valueOf(e.getResult().getCode().value());
         String errorMessage = e.getResult().getMessage();
 
-        // TODO : 중복코드
         return ResponseEntity.status(e.getResult().getCode())
-                .body(new ExceptionResponseDTO().builder()
-                        .code(errorCode)
-                        .message(errorMessage)
-                        .build());
+                .body(buildExceptionResponse(errorCode, errorMessage));
     }
 
     /**
@@ -66,9 +58,14 @@ public class GlobalExceptionHandler {
                 : GlobalExceptionResult.UNKNOWN_EXCEPTION.getMessage();
 
         return ResponseEntity.status(GlobalExceptionResult.UNKNOWN_EXCEPTION.getCode())
-                .body(new ExceptionResponseDTO().builder()
-                                .code(errorCode)
-                                .message(errorMessage)
-                                .build());
+                .body(buildExceptionResponse(errorCode, errorMessage));
+    }
+
+    // 예외핸들러의 body를 빌드
+    public ExceptionResponseDTO buildExceptionResponse(String errorCode, String errorMessage) {
+        return new ExceptionResponseDTO().builder()
+                    .code(errorCode)
+                    .message(errorMessage)
+                    .build();
     }
 }

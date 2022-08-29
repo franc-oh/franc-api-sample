@@ -26,7 +26,7 @@ public class MyMembershipController {
 
     @PostMapping("/join")
     public ResponseEntity<?> join(@RequestBody @Valid MyMembershipJoinRequestDTO request) throws Exception {
-        ResponseDTO response = new ResponseDTO();
+        ResponseDTO response;
 
         log.info("멤버십가입_Request => {}", request.toString());
         response = myMembershipService.join(request);

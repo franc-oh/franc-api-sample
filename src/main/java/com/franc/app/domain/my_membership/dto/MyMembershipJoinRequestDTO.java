@@ -1,10 +1,8 @@
 package com.franc.app.domain.my_membership.dto;
 
 import com.franc.app.global.code.AccountGrade;
-import com.franc.app.global.code.converter.AccountGradeConverter;
 import lombok.*;
 
-import javax.persistence.Convert;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -18,7 +16,6 @@ public class MyMembershipJoinRequestDTO {
     @Min(1)
     private Long mspId;
     @NotNull
-    @Convert(converter = AccountGradeConverter.class)
     private AccountGrade accountGrade;
 
     @Builder

@@ -1,5 +1,6 @@
 package com.franc.app.global.code;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -15,4 +16,14 @@ public enum AccountStatus implements CodeValue {
 
     private final String code;
     private final String value;
+
+    @JsonCreator
+    public static AccountStatus fromString(String str) {
+        for(AccountStatus accountStatus : AccountStatus.values()) {
+            if(accountStatus.getCode().equals(str))
+                return accountStatus;
+        }
+
+        return null;
+    }
 }

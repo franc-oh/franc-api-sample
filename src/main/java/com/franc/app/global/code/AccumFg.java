@@ -1,5 +1,6 @@
 package com.franc.app.global.code;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -14,4 +15,14 @@ public enum AccumFg implements CodeValue {
 
     private final String code;
     private final String value;
+
+    @JsonCreator
+    public static AccumFg fromString(String str) {
+        for(AccumFg accumFg : AccumFg.values()) {
+            if(accumFg.getCode().equals(str))
+                return accumFg;
+        }
+
+        return null;
+    }
 }

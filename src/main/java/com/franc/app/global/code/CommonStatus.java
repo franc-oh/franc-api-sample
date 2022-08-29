@@ -1,5 +1,6 @@
 package com.franc.app.global.code;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.*;
 
 /**
@@ -13,4 +14,14 @@ public enum CommonStatus implements CodeValue {
 
     private final String code;
     private final String value;
+
+    @JsonCreator
+    public static CommonStatus fromString(String str) {
+        for(CommonStatus commonStatus : CommonStatus.values()) {
+            if(commonStatus.getCode().equals(str))
+                return commonStatus;
+        }
+
+        return null;
+    }
 }
