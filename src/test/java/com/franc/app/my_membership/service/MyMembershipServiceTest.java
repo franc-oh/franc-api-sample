@@ -1,5 +1,7 @@
 package com.franc.app.my_membership.service;
 
+import com.franc.app.domain.my_membership.dto.MyMembershipWithdrawalRequestDTO;
+import com.franc.app.domain.my_membership.dto.MyMembershipWithdrawalResponseDTO;
 import com.franc.app.domain.my_membership.service.MyMembershipService;
 import com.franc.app.domain.my_membership.dto.MyMembershipJoinResponseDTO;
 import com.franc.app.global.code.AccountGrade;
@@ -19,6 +21,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -45,7 +48,7 @@ public class MyMembershipServiceTest {
         Long accountId = 2L; // 'USER' 등급의 사용자
         Long mspId = 3L; // VIP만 받는 멤버십
         AccountGrade accountGrade = AccountGrade._USER;
-        MyMembershipJoinRequestDTO myMembershipReqDTO = buildReqDTO(accountId, mspId, accountGrade);
+        MyMembershipJoinRequestDTO myMembershipReqDTO = buildJoinReqDTO(accountId, mspId, accountGrade);
 
         // 사용자의 등급으로 가입이 가능한지 조회 => 데이터가 없다면??
         when(membershipGradeRepository.findByIdAndStatusEqualsUsing(any(MembershipGradeKey.class)))
@@ -67,7 +70,7 @@ public class MyMembershipServiceTest {
         Long mspId = 1L; // USER 계급도 가입 가능한 멤버십
         AccountGrade accountGrade = AccountGrade._USER;
         MyMembershipStatus status = MyMembershipStatus.NON_USING;
-        MyMembershipJoinRequestDTO myMembershipReqDTO = buildReqDTO(accountId, mspId, accountGrade);
+        MyMembershipJoinRequestDTO myMembershipReqDTO = buildJoinReqDTO(accountId, mspId, accountGrade);
 
         // 사용자의 등급으로 가입이 가능한지 조회 => 통과하도록 처리
         when(membershipGradeRepository.findByIdAndStatusEqualsUsing(any(MembershipGradeKey.class)))
@@ -95,7 +98,7 @@ public class MyMembershipServiceTest {
         AccountGrade accountGrade = AccountGrade._USER;
         MyMembershipStatus status = MyMembershipStatus.WITHDRAWAL;
         LocalDateTime withdrawalDate = LocalDateTime.now();
-        MyMembershipJoinRequestDTO myMembershipReqDTO = buildReqDTO(accountId, mspId, accountGrade);
+        MyMembershipJoinRequestDTO myMembershipReqDTO = buildJoinReqDTO(accountId, mspId, accountGrade);
 
         // 사용자의 등급으로 가입이 가능한지 조회 => 통과하도록 처리
         when(membershipGradeRepository.findByIdAndStatusEqualsUsing(any(MembershipGradeKey.class)))
@@ -122,7 +125,7 @@ public class MyMembershipServiceTest {
         Long mspId = 1L; // USER 계급도 가입 가능한 멤버십
         AccountGrade accountGrade = AccountGrade._USER;
         MyMembershipStatus status = MyMembershipStatus.USING;
-        MyMembershipJoinRequestDTO myMembershipReqDTO = buildReqDTO(accountId, mspId, accountGrade);
+        MyMembershipJoinRequestDTO myMembershipReqDTO = buildJoinReqDTO(accountId, mspId, accountGrade);
         MyMembership myMembership = buildEntity(accountId, mspId, status, null);
 
         // 사용자의 등급으로 가입이 가능한지 조회 => 통과하도록 처리
@@ -159,7 +162,7 @@ public class MyMembershipServiceTest {
         AccountGrade accountGrade = AccountGrade._USER;
         MyMembershipStatus status = MyMembershipStatus.WITHDRAWAL;
         LocalDateTime withdrawalDate = LocalDateTime.now().minusDays(1L);
-        MyMembershipJoinRequestDTO myMembershipReqDTO = buildReqDTO(accountId, mspId, accountGrade);
+        MyMembershipJoinRequestDTO myMembershipReqDTO = buildJoinReqDTO(accountId, mspId, accountGrade);
         MyMembership myMembership = buildEntity(accountId, mspId, status, withdrawalDate);
 
         // 사용자의 등급으로 가입이 가능한지 조회 => 통과하도록 처리
@@ -183,13 +186,90 @@ public class MyMembershipServiceTest {
         verify(myMembershipRepository, times(1)).findById(any(MyMembershipKey.class));
     }
 
+    @Test
+    public void 멤버십탈퇴_실패_멤버십가입정보가없는경우() throws Exception {
+        // #given
+        Long accountId = 2L;
+        Long mspId = 1L;
+
+        when(myMembershipRepository.findById(any(MyMembershipKey.class)))
+                .thenReturn(Optional.empty());
+
+        // #when
+        BizException exception
+                = assertThrows(BizException.class, () -> myMembershipService.withdrawal(buildWithdrawalReqDTO(accountId, mspId)));
+
+        // #then
+        assertThat(exception.getResult()).isEqualTo(GlobalExceptionResult.MY_MEMBERSHIP_WITHDRAWAL_NOT_EXIST_MEMBERSHIP);
+        verify(myMembershipRepository, times(1)).findById(any(MyMembershipKey.class));
+
+    }
+    @Test
+    public void 멤버십탈퇴_실패_탈퇴불가능한상태() throws Exception {
+        // #given
+        Long accountId = 2L;
+        Long mspId = 1L;
+
+        // 상태값이 '사용' 중이 아닌 경우 탈퇴불가
+        when(myMembershipRepository.findById(any(MyMembershipKey.class)))
+                .thenReturn(Optional.of(new MyMembership().builder()
+                        .accountId(accountId)
+                        .mspId(mspId)
+                        .status(MyMembershipStatus.NON_USING)
+                        .build()));
+
+        // #when
+        BizException exception
+                = assertThrows(BizException.class, () -> myMembershipService.withdrawal(buildWithdrawalReqDTO(accountId, mspId)));
+
+        // #then
+        assertThat(exception.getResult()).isEqualTo(GlobalExceptionResult.MY_MEMBERSHIP_WITHDRAWAL_NOT_AVAIL_STATUS);
+        verify(myMembershipRepository, times(1)).findById(any(MyMembershipKey.class));
+    }
+
+    @Test
+    public void 멤버십탈퇴_성공() throws Exception {
+        // #given
+        Long accountId = 2L;
+        Long mspId = 1L;
+        LocalDate withdrawalDate8 = LocalDateTime.now().toLocalDate();
+
+        // 탈퇴를 위해 '사용' 중인 멤버십으로 셋팅
+        when(myMembershipRepository.findById(any(MyMembershipKey.class)))
+                .thenReturn(Optional.of(new MyMembership().builder()
+                        .accountId(accountId)
+                        .mspId(mspId)
+                        .status(MyMembershipStatus.USING)
+                        .totalAmt(0)
+                        .usablePoint(0)
+                        .build()));
+
+        // #when
+        MyMembershipWithdrawalResponseDTO withdrawalMembership = myMembershipService.withdrawal(buildWithdrawalReqDTO(accountId, mspId));
+
+        // #then
+        assertThat(withdrawalMembership).isNotNull();
+        assertThat(withdrawalMembership.getAccountId()).isEqualTo(accountId);
+        assertThat(withdrawalMembership.getMspId()).isEqualTo(mspId);
+        assertThat(withdrawalMembership.getStatus()).isEqualTo(MyMembershipStatus.WITHDRAWAL);
+        assertThat(withdrawalMembership.getWithdrawalDate().toLocalDate()).isEqualTo(withdrawalDate8);
+        verify(myMembershipRepository, times(1)).findById(any(MyMembershipKey.class));
+    }
 
 
-    public MyMembershipJoinRequestDTO buildReqDTO(Long accountId, Long mspId, AccountGrade accountGrade) {
+
+    public MyMembershipJoinRequestDTO buildJoinReqDTO(Long accountId, Long mspId, AccountGrade accountGrade) {
         return new MyMembershipJoinRequestDTO().builder()
                 .accountId(accountId)
                 .mspId(mspId)
                 .accountGrade(accountGrade)
+                .build();
+    }
+
+    public MyMembershipWithdrawalRequestDTO buildWithdrawalReqDTO(Long accountId, Long mspId) {
+        return new MyMembershipWithdrawalRequestDTO().builder()
+                .accountId(accountId)
+                .mspId(mspId)
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.franc.app.domain.my_membership.controller;
 
+import com.franc.app.domain.my_membership.dto.MyMembershipWithdrawalRequestDTO;
 import com.franc.app.domain.my_membership.service.MyMembershipService;
 import com.franc.app.domain.my_membership.dto.MyMembershipJoinRequestDTO;
 import com.franc.app.global.dto.ResponseDTO;
@@ -8,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -29,10 +27,27 @@ public class MyMembershipController {
         ResponseDTO response;
 
         log.info("멤버십가입_Request => {}", request.toString());
+
         response = myMembershipService.join(request);
-        log.info("멤버십가입_Response => {}", response.toString());
+
+        if(response != null)
+            log.info("멤버십가입_Response => {}", response.toString());
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/withdrawal")
+    public ResponseEntity<?> withdrawal(@RequestBody @Valid MyMembershipWithdrawalRequestDTO request) throws Exception {
+        ResponseDTO response = null;
+
+        log.info("멤버십탈퇴_Request => {}", request.toString());
+
+        response = myMembershipService.withdrawal(request);
+
+        if(response != null)
+            log.info("멤버십탈퇴_Response => {}", response.toString());
+
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
 

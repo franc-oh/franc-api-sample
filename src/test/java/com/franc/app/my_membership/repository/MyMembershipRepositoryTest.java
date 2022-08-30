@@ -61,7 +61,7 @@ public class MyMembershipRepositoryTest {
     }
 
     @Test
-    public void MY멤버십가입정보가져오기_탈퇴() {
+    public void 멤버십탈퇴() {
         // #given
         insertMyMembership();
 

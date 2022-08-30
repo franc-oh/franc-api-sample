@@ -17,6 +17,7 @@ public enum AccountGrade implements CodeValue {
     private final String code;
     private final String value;
 
+    // TODO : @JsonCreator 중복코드 제거
     @JsonCreator
     public static AccountGrade fromString(String str) {
         for(AccountGrade accountGrade : AccountGrade.values()) {
