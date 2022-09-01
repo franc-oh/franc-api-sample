@@ -11,7 +11,6 @@ import com.franc.app.domain.membership.repository.entity.key.MembershipGradeKey;
 import com.franc.app.domain.my_membership.repository.MyMembershipRepository;
 import com.franc.app.domain.my_membership.repository.entity.MyMembership;
 import com.franc.app.domain.my_membership.dto.MyMembershipJoinRequestDTO;
-import com.franc.app.global.dto.ResponseDTO;
 import com.franc.app.global.exception.BizException;
 import com.franc.app.global.exception.GlobalExceptionResult;
 import com.franc.app.global.util.DateUtil;

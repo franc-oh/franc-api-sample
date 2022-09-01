@@ -24,13 +24,12 @@ spring:
   ## DB Connection
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=1
+    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=1;MODE=MySQL
     username: franc_membership
     password: 22#m!embership
 
   ## JPA 관련 설정
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     generate-ddl: true # -- 자동으로 엔티티와 테이블을 맞출 것인가? (true/false)
     hibernate:
       ddl-auto: validate # -- 자동으로 엔티티와 테이블을 맞출 것인가? (none/create-drop/create/update/validate)
@@ -38,6 +37,7 @@ spring:
     open-in-view: false # -- 영속성을 컨트롤러 영역까지 가져갈 것인가? (false:서비스 영역까지만 유지할 것인가?)
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         format_sql: true # -- Pretty Log
 
   ## Jackson 관련 설정

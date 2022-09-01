@@ -12,6 +12,7 @@ import com.franc.app.global.code.MyMembershipStatus;
 import com.franc.app.global.exception.BizException;
 import com.franc.app.global.exception.GlobalExceptionHandler;
 import com.franc.app.global.exception.GlobalExceptionResult;
+import com.franc.app.global.util.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -316,7 +317,7 @@ public class MyMembershipControllerTest {
                 .andExpect(jsonPath("accountId").value(accountId))
                 .andExpect(jsonPath("mspId").value(mspId))
                 .andExpect(jsonPath("status").value(status.getCode()))
-                .andExpect(jsonPath("withdrawalDate").value(withdrawalDate.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"))));
+                .andExpect(jsonPath("withdrawalDate").value(DateUtil.formatLocalDateTime(withdrawalDate)));
     }
 
 

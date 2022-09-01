@@ -2,6 +2,7 @@ package com.franc.app.global.util;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
 
@@ -11,7 +12,7 @@ public class DateUtil {
      * @return
      * @throws Exception
      */
-    public static boolean isEqualNowDate(LocalDateTime pDateTime) throws Exception {
+    public static boolean isEqualNowDate(LocalDateTime pDateTime) {
         if(pDateTime == null)
             throw new NullPointerException();
 
@@ -29,5 +30,12 @@ public class DateUtil {
             throw new NullPointerException();
 
         return LocalDate.now().isEqual(pDate);
+    }
+
+    public static String formatLocalDateTime(LocalDateTime pDateTime) {
+        if(pDateTime == null)
+            pDateTime = LocalDateTime.now();
+
+        return pDateTime.format((DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
     }
 }
