@@ -14,6 +14,4 @@ public class MyMembershipBarcodeRepositoryTest {
     private MyMembershipBarcodeRepository myMembershipBarcodeRepository;
 
 
-
-
 }
