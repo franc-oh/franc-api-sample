@@ -7,11 +7,13 @@ import com.franc.app.domain.membership.repository.entity.MembershipGrade;
 import com.franc.app.domain.membership.repository.entity.key.MembershipGradeKey;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class MembershipGradeRepositoryTest {
 
     @Autowired

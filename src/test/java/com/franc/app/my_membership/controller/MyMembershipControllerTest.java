@@ -30,9 +30,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.stream.Stream;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -199,13 +197,11 @@ public class MyMembershipControllerTest {
                 .andExpect(jsonPath("status").value(MyMembershipStatus.USING.getCode()));
     }
 
-    @Test
+    @ParameterizedTest
     @MethodSource("invalidMyMembershipWithdrawalParams")
-    public void 멤버십탈퇴_실패_잘못된파라미터() throws Exception {
+    public void 멤버십탈퇴_실패_잘못된파라미터(Long accountId, Long mspId) throws Exception {
         // #given
         String url = "/api/v1/my_membership/withdrawal";
-        Long accountId = 1L;
-        Long mspId = 1L;
         String content = "{\"accountId\":\"" + accountId + "\","
                 + "\"mspId\":\"" + mspId  + "\"}";
 
