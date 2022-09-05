@@ -2,8 +2,7 @@ package com.franc.app.domain.my_membership.repository.entity;
 
 import com.franc.app.domain.my_membership.repository.entity.key.MyMembershipBarcodeKey;
 import com.franc.app.global.code.AccumFg;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -16,6 +15,9 @@ import java.time.LocalDateTime;
 @Entity
 @IdClass(MyMembershipBarcodeKey.class)
 @Getter
+@Builder
+@ToString
+@AllArgsConstructor
 @NoArgsConstructor
 public class MyMembershipBarcode {
     @Id
@@ -23,8 +25,7 @@ public class MyMembershipBarcode {
     private String barCd;
 
     @Id
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createDate;
 
     @Column(nullable = false)
@@ -33,7 +34,6 @@ public class MyMembershipBarcode {
     @Column(nullable = false)
     private Long mspId;
 
-    @Column(nullable = false)
     private Long franchiseeId;
 
     @Enumerated(EnumType.STRING)
@@ -51,4 +51,10 @@ public class MyMembershipBarcode {
 
     private LocalDateTime useDate;
 
+    public void useBarcode(Long franchiseeId, Integer tradeAmt, Integer usePoint) {
+        this.franchiseeId = franchiseeId;
+        this.tradeAmt = tradeAmt == null ? 0 : tradeAmt;
+        this.usePoint = usePoint == null ? 0 : usePoint;
+        this.useDate = LocalDateTime.now();
+    }
 }

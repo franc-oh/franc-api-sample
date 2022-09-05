@@ -32,10 +32,16 @@ public class DateUtil {
         return LocalDate.now().isEqual(pDate);
     }
 
+    /**
+     * LocalDateTime 포맷터 (yyyyMMddHHmmss)
+     * @param pDateTime
+     * @return
+     */
     public static String formatLocalDateTime(LocalDateTime pDateTime) {
         if(pDateTime == null)
             pDateTime = LocalDateTime.now();
 
         return pDateTime.format((DateTimeFormatter.ofPattern("yyyyMMddHHmmss")));
     }
+
 }

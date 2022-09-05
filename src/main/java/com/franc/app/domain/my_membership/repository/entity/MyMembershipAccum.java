@@ -1,6 +1,5 @@
 package com.franc.app.domain.my_membership.repository.entity;
 
-import com.franc.app.domain.my_membership.repository.entity.key.MyMembershipAccumKey;
 import com.franc.app.global.code.AccumFg;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@IdClass(MyMembershipAccumKey.class)
 @Getter
 @NoArgsConstructor
 public class MyMembershipAccum {
@@ -20,11 +18,14 @@ public class MyMembershipAccum {
     @Column(length = 20)
     private String pointAccumSeq;
 
-    @Id
+    @Column(nullable = false)
     private Long mspId;
 
-    @Id
+    @Column(nullable = false)
     private Long accountId;
+
+    @Column(nullable = false)
+    private Long franchiseeId;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 1, columnDefinition = "char(1) default 'A'")

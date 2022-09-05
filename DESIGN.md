@@ -140,6 +140,7 @@ UPDATE_USER                       - 수정자
 POINT_ACCUM_SEQ [*]               - SEQ
 MSP_ID                            - 멤버십ID
 ACCOUNT_ID                        - 회원ID
+FRANCHISEE_ID                     - 가맹점ID
 ACCUM_FG                          - 적립구분 (A:적립 U:사용)
 TRADE_POINT                       - 거래포인트
 EXPIRE_YMD                        - 만료일 (yyyymmdd)

@@ -11,7 +11,14 @@ public interface MyMembershipBarcodeRepository extends JpaRepository<MyMembershi
     @Query(value = "SELECT MY_MEMBERSHIP_BARCODE_SEQ.nextval FROM DUAL", nativeQuery = true)
     Integer myMembershipBarcodeSeqNextVal();
 
-    @Query(value = "SELECT F_GET_MY_MEMBERSHIP_BARCODE_NO(:accountId, :serviceFg) FROM DUAL", nativeQuery = true)
-    String getMyMembershipBarcodeNo(@Param("accountId") Long accountId, @Param("serviceFg") String serviceFg);
+
+    // TODO : 바코드번호 채번 함수 만들기 (현재 임의로 채번 중)
+    //@Query(value = "SELECT F_GET_MY_MEMBERSHIP_BARCODE_NO(:accountId, :serviceFg) FROM DUAL", nativeQuery = true)
+    @Query(value = "SELECT "
+            + "88 || SUBSTR(:hphone, -3) || '1'"
+            + "|| TRIM(TO_CHAR(SYSTIMESTAMP, 'D')) || TRIM( TO_CHAR( TO_CHAR(SYSTIMESTAMP, 'HH')*60*60 + TO_CHAR(SYSTIMESTAMP, 'MM')*60 + TO_CHAR(SYSTIMESTAMP, 'SS') , '00000' ) ) || TRIM(TO_CHAR(MY_MEMBERSHIP_BARCODE_SEQ.NEXTVAL, '0000'))"
+            + "|| NVL(:serviceFg, '00')"
+            + "FROM DUAL", nativeQuery = true)
+    String getMyMembershipBarcodeNo(@Param("hphone") String hphone, @Param("serviceFg") String serviceFg);
 
 }
