@@ -68,8 +68,6 @@ public class MyMembershipBarcodeRepositoryTest {
                         .createDate(createDate)
                         .build()).orElse(null);
 
-        System.out.println("===============> " + myMembershipBarcode.toString());
-
         // #then
         assertThat(myMembershipBarcode).isNotNull();
         assertThat(myMembershipBarcode.getMspId()).isEqualTo(mspId);

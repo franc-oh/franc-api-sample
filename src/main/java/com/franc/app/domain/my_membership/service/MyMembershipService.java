@@ -97,7 +97,7 @@ public class MyMembershipService {
     }
 
     /**
-     *
+     * 멤버십 탈퇴
      * @param request
      * @return
      * @throws Exception
